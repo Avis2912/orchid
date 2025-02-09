@@ -1,11 +1,41 @@
 'use client';
 
-import { useState } from 'react';
-import { Search, CheckCircle2, Loader2, ArrowRight, Users, FileText, Phone, User as IconUser } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sidebar } from '@/components/navigation/sidebar';
-import { ICON_BORDER_RADIUS, THEME } from '@/lib/universalVariables';
-import { Tooltip } from '@/components/ui/tooltip';
+import AnalysisSteps from '@/components/home/AnalysisSteps';
+import CompanyList from '@/components/home/CompanyList';
+import SearchSettings from '@/components/home/SearchSettings';
+import { Search } from 'lucide-react';
+import Image from 'next/image';
+import { Users } from 'lucide-react';
+
+interface Buyer {
+  name: string;
+  role: string;
+  timing: string;
+  relevance: 'High' | 'Medium' | 'Low';
+}
+
+interface Interaction {
+  type: string;
+  date: string;
+  details: string;
+  outcome: 'Positive' | 'Neutral' | 'Pending';
+}
+
+interface BuyerDetail extends Buyer {
+  imageUrl: string;
+  title: string;
+  responsibility: string;
+  linkedin?: string;
+  twitter?: string;
+  department?: string;
+  influence?: 'Decision Maker' | 'Influencer' | 'Champion';
+  lastActive?: string;
+  avatar?: string; // We'll use better avatars
+}
 
 const analysisSteps = [
   "Scanning Idaho market data...",
@@ -17,7 +47,7 @@ const analysisSteps = [
 ];
 
 const dummyCompanies = [
-  { 
+  {
     name: 'Alpine Tech Solutions',
     revenue: '$2.3M',
     readiness: '87%',
@@ -25,9 +55,39 @@ const dummyCompanies = [
     growth: '+24% YoY',
     employees: '45-50',
     industry: 'Software Development',
-    logo: '🏔️'
+    logo: '🏔️',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'alpinetech.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led', 'Market Leader'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Idaho Innovators Inc',
     revenue: '$1.8M',
     readiness: '92%',
@@ -35,9 +95,39 @@ const dummyCompanies = [
     growth: '+31% YoY',
     employees: '30-35',
     industry: 'Tech Consulting',
-    logo: '💡'
+    logo: '💡',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'idahoinnovators.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Gem State Digital',
     revenue: '$3.1M',
     readiness: '85%',
@@ -45,9 +135,39 @@ const dummyCompanies = [
     growth: '+18% YoY',
     employees: '60-70',
     industry: 'Digital Marketing',
-    logo: '💎'
+    logo: '💎',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'gemstatedigital.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Mountain Data Systems',
     revenue: '$4.2M',
     readiness: '78%',
@@ -55,9 +175,39 @@ const dummyCompanies = [
     growth: '+22% YoY',
     employees: '80-90',
     industry: 'Data Analytics',
-    logo: '📊'
+    logo: '📊',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'mountaindata.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Sawtooth Solutions',
     revenue: '$2.7M',
     readiness: '90%',
@@ -65,9 +215,39 @@ const dummyCompanies = [
     growth: '+28% YoY',
     employees: '40-45',
     industry: 'Cloud Services',
-    logo: '☁️'
+    logo: '☁️',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'sawtoothsolutions.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Cascade Computing',
     revenue: '$1.5M',
     readiness: '95%',
@@ -75,9 +255,39 @@ const dummyCompanies = [
     growth: '+35% YoY',
     employees: '25-30',
     industry: 'IT Services',
-    logo: '🌊'
+    logo: '🌊',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'cascadecomputing.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
-  { 
+  {
     name: 'Silver Valley Tech',
     revenue: '$2.9M',
     readiness: '82%',
@@ -85,52 +295,48 @@ const dummyCompanies = [
     growth: '+20% YoY',
     employees: '50-55',
     industry: 'Hardware Solutions',
-    logo: '⚡'
+    logo: '⚡',
+    sources: {
+      count: 4,
+      details: [
+        { type: 'Website', url: 'silvervalleytech.com', date: '2 days ago', icon: Globe },
+        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
+        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
+      ]
+    },
+    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
+    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
+    interactions: [
+      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
+      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
+      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
+    ] as Interaction[],
+    buyers: [
+      {
+        name: 'Sarah Chen',
+        role: 'Head of Engineering',
+        timing: 'Active Search',
+        relevance: 'High',
+        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
+        title: 'Senior Director of Engineering',
+        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
+        linkedin: 'sarahchen',
+        twitter: 'schen_tech'
+      },
+      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
+      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
+    ] as BuyerDetail[]
   },
 ];
 
-const SearchSettings = ({ iconSettings, toggleIcon, reasoningLevel, toggleReasoning }: any) => {
-  const icons = [
-    { key: 'crm', icon: Users, title: 'CRM' },
-    { key: 'pressReleases', icon: FileText, title: 'Press Releases' },
-    { key: 'earningsCalls', icon: Phone, title: 'Earnings Calls' },
-    { key: 'personData', icon: IconUser, title: 'Person Data' },
-  ];
+import { Globe, Link, FileText } from 'lucide-react';
 
-  return (
-    <div className="flex gap-4 mt-4 justify-end w-full">
-      {icons.map(({ key, icon: Icon, title }) => (
-        <Tooltip key={key} content={title}>
-          <button 
-            type="button"
-            onClick={() => toggleIcon(key as keyof typeof iconSettings)}
-            className={`
-              w-9 h-9 flex items-center justify-center
-              transition-all duration-200 ease-in-out
-              bg-white hover:bg-gray-50
-              ${iconSettings[key as keyof typeof iconSettings] 
-                ? 'border border-gray-300' 
-                : ''
-              }
-            `}
-            style={{ borderRadius: ICON_BORDER_RADIUS }}
-          >
-            <Icon className="h-4 w-4 text-gray-700" />
-          </button>
-        </Tooltip>
-      ))}
-      <Tooltip content={`Reasoning Level: ${reasoningLevel}`}>
-        <button 
-          type="button"
-          onClick={toggleReasoning}
-          className="px-4 py-2 bg-gray-900 text-white text-sm hover:bg-gray-800 transition-colors"
-          style={{ borderRadius: ICON_BORDER_RADIUS }}
-        >
-          {reasoningLevel}
-        </button>
-      </Tooltip>
-    </div>
-  );
+const formatTime = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return minutes > 0 
+    ? `${minutes}m ${remainingSeconds}s`
+    : `${remainingSeconds}s`;
 };
 
 export default function HomePage() {
@@ -148,6 +354,17 @@ export default function HomePage() {
     earningsCalls: true,
     personData: true,
   });
+  const [totalElapsedTime, setTotalElapsedTime] = useState(0);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isSearching) { // Only count time during analysis
+      interval = setInterval(() => {
+        setTotalElapsedTime(prev => prev + 1);
+      }, 1000);
+    }
+    return () => clearInterval(interval);
+  }, [isSearching]); // Remove showResults dependency
 
   const reasoningOptions: Array<'Low' | 'Medium' | 'High'> = ['Low', 'Medium', 'High'];
   const toggleReasoning = () => {
@@ -160,7 +377,7 @@ export default function HomePage() {
   };
 
   const canSearch = searchQuery.trim().length > 0;
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!canSearch || isSearching) return;
@@ -169,17 +386,17 @@ export default function HomePage() {
 
   const handleSearch = () => {
     if (isSearching) return;
-    
+
     setIsSearching(true);
     setShowResults(false);
     setCurrentStep(0);
     setCompletedSteps([]);
-    
+
     const interval = setInterval(() => {
       setCurrentStep((prev) => {
         const newStep = prev + 1;
         setCompletedSteps(steps => [...steps, prev]);
-        
+
         if (newStep >= analysisSteps.length) {
           clearInterval(interval);
           setTimeout(() => {
@@ -208,7 +425,7 @@ export default function HomePage() {
               />
             </div>
           )}
-          
+
           <div className="w-full max-w-5xl mx-auto relative z-10">
             <AnimatePresence mode="wait">
               {/* Search Input Section */}
@@ -220,12 +437,12 @@ export default function HomePage() {
                   exit={{ opacity: 0, y: -20 }}
                   className="w-full flex flex-col items-center px-28 space-y-5"
                 >
-                    <h1 className="text-[42px] text-gray-600 tracking-tight font-[250] font-instrument-serif">
+                  <h1 className="text-[42px] text-gray-600 tracking-tight font-[250] font-instrument-serif">
                     Hi Avi - find your next customer
-                    </h1>
-                    <form onSubmit={handleSubmit} className="w-full relative mx-auto">
-                    <Search 
-                      className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" 
+                  </h1>
+                  <form onSubmit={handleSubmit} className="w-full relative mx-auto">
+                    <Search
+                      className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400"
                     />
                     <motion.input
                       type="text"
@@ -241,17 +458,17 @@ export default function HomePage() {
                       onChange={(e) => setSearchQuery(e.target.value)}
                       // Continuous modern, subtle pulsating glow animation
                       animate={{
-                      boxShadow: [
-                      "0 0 0px rgba(255,198,10,0)",
-                      "0 0 4px rgba(255,198,10,0.1)",
-                      "0 0 0px rgba(255,198,10,0)"
-                      ]
+                        boxShadow: [
+                          "0 0 0px rgba(255,198,10,0)",
+                          "0 0 4px rgba(255,198,10,0.1)",
+                          "0 0 0px rgba(255,198,10,0)"
+                        ]
                       }}
                       transition={{
-                      duration: 2,
-                      ease: "easeInOut",
-                      repeat: Infinity,
-                      repeatType: "loop"
+                        duration: 2,
+                        ease: "easeInOut",
+                        repeat: Infinity,
+                        repeatType: "loop"
                       }}
                     />
                     <button
@@ -259,16 +476,16 @@ export default function HomePage() {
                       disabled={!canSearch}
                       onClick={handleSubmit}
                       className={`absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 flex items-center justify-center rounded-md transition-colors ${
-                      canSearch 
-                        ? 'bg-gray-900 text-white hover:bg-gray-800' 
-                        : 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      }`}
+                        canSearch
+                          ? 'bg-gray-900 text-white hover:bg-gray-800'
+                          : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                        }`}
                     >
                       <ArrowRight className="h-4 w-4" />
                     </button>
-                    </form>
+                  </form>
                   {/* Search Settings: Right aligned icons with on/off styling */}
-                  <SearchSettings 
+                  <SearchSettings
                     iconSettings={iconSettings}
                     toggleIcon={toggleIcon}
                     reasoningLevel={reasoningLevel}
@@ -286,32 +503,11 @@ export default function HomePage() {
                   exit={{ opacity: 0 }}
                   className="flex items-center justify-center"
                 >
-                  <div className="space-y-4"> {/* Increased spacing between items */}
-                    {analysisSteps.map((step, index) => (
-                      <motion.div
-                        key={step}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
-                        className="flex items-center space-x-4" // Increased icon spacing
-                      >
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          animate={{ scale: 1 }}
-                          className="text-gray-900"
-                        >
-                          {currentStep === index ? (
-                            <Loader2 className="h-5 w-5 animate-spin" /> // Increased icon size
-                          ) : completedSteps.includes(index) ? (
-                            <CheckCircle2 className="h-5 w-5" /> // Increased icon size
-                          ) : (
-                            <div className="h-5 w-5" /> // Increased placeholder size
-                          )}
-                        </motion.div>
-                        <span className="text-base text-gray-600">{step}</span> {/* Increased text size */}
-                      </motion.div>
-                    ))}
-                  </div>
+                  <AnalysisSteps
+                    analysisSteps={analysisSteps}
+                    currentStep={currentStep}
+                    completedSteps={completedSteps}
+                  />
                 </motion.div>
               )}
 
@@ -323,50 +519,31 @@ export default function HomePage() {
                   animate={{ opacity: 1 }}
                   className="px-4"
                 >
-                  {/* Added title section */}
-                  <div className="mb-6 flex items-center justify-between">
-                    <h2 className="text-xl text-gray-900 font-[350]">Companies Found</h2>
-                    <p className="text-sm text-gray-500">Found {dummyCompanies.length} matches</p>
+                  {/* Updated title section */}
+                  <div className="mb-8 flex items-center justify-between">
+                    <h2 className="text-2xl text-gray-900 font-[350]">Companies Found</h2>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <span className="tabular-nums">Took {formatTime(totalElapsedTime)}</span>
+                      <span>|</span>
+                      <p>Found {dummyCompanies.length} matches</p>
+                    </div>
                   </div>
-                  
-                  {/* Updated border styling to match items */}
-                  <div className="rounded-lg overflow-hidden border border-gray-100">
-                    {dummyCompanies.map((company, index) => (
-                      <motion.div
-                        key={company.name}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.15 }} // Increased from 0.1
-                        className="bg-white hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0"
-                      >
-                        <div className="px-6 py-4">
-                          <div className="flex items-center gap-6">
-                            <div className="flex-none text-2xl">{company.logo}</div>
-                            <div className="flex-1 grid grid-cols-4 gap-6">
-                              <div className="space-y-1">
-                                <p className="text-sm font-[450] text-gray-900">{company.name}</p>
-                                <p className="text-xs text-gray-500">{company.location}</p>
-                              </div>
-                              <div className="space-y-1">
-                                <p className="text-sm text-gray-900 font-[350]">{company.revenue}</p> {/* Reduced boldness */}
-                                <p className="text-xs text-emerald-600 font-medium">{company.growth}</p>
-                              </div>
-                              <div className="space-y-1">
-                                <p className="text-sm text-gray-600">{company.employees}</p>
-                                <p className="text-xs text-gray-500">{company.industry}</p>
-                              </div>
-                              <div className="text-right">
-                                <div className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-1">
-                                  <span className="text-xs font-medium text-emerald-700">
-                                    {company.readiness} Ready
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
+
+                  <CompanyList companies={dummyCompanies} />
+
+                  {/* Updated CRM Button */}
+                  <div className="mt-6 flex justify-end">
+                    <button className="flex items-center gap-2 px-2.5 py-1.5 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
+                      <Image
+                        src="https://1000logos.net/wp-content/uploads/2017/08/Salesforce-logo.jpg"
+                        alt="Salesforce"
+                        width={16}
+                        height={16}
+                        className="opacity-80"
+                      />
+                      <span className="text-sm text-gray-600">Add All to CRM</span>
+                      {/* <Users className="h-3.5 w-3.5 text-gray-400" /> */}
+                    </button>
                   </div>
                 </motion.div>
               )}
