@@ -1,0 +1,51 @@
+[36m📘 [INFO][0m Starting server...
+[36m📘 [INFO][0m Environment check: {
+  NODE_ENV: undefined,
+  PORT: 3699,
+  OPENAI_KEY: '✅ Present',
+  CWD: '/Users/avis/Desktop/orchid/backend'
+}
+[32m✅ [SUCCESS][0m Orchid server running on port 3699
+[36m📘 [INFO][0m [r7e3a] New request received: dallas cos
+[36m📘 [INFO][0m Starting analysis for query: dallas cos
+[36m📘 [INFO][0m Step 2: Searching You.com...
+[36m📘 [INFO][0m [r7e3a] Progress: { step: 1, info: 'Searching for companies...' }
+[36m📘 [INFO][0m Found 10 results from You.com
+[36m📘 [INFO][0m First result: {
+  ai_snippets: 'If you need to get in touch with our customer service, please emailcustomerservice.us@cosstores.com or call us on +1 855 842 1818, toll free.',
+  description: 'If you need to get in touch with our customer service, please emailcustomerservice.us@cosstores.com or call us on +1 855 842 1818, toll free · To close this message, simply press Escape',
+  snippet: 'If you need to get in touch with our customer service, please emailcustomerservice.us@cosstores.com or call us on +1 855 842 1818, toll free.',
+  title: 'Store Locator & Opening Hours - COS',
+  url: 'https://www.cos.com/en_usd/store-locator.html'
+}
+[36m📘 [INFO][0m Step 3: Enriching data with Claude...
+[36m📘 [INFO][0m [r7e3a] Progress: { step: 2, info: 'Analyzing companies...' }
+[36m📘 [INFO][0m Enrichment response: Based on the provided search results, here is a list of potential company leads with detailed information:
+
+1. COS Stores
+   - Contact Information:
+     - Customer Service Email: customerservice.us@cosstores.com
+     - Customer Service Phone: +1 855 842 1818 (toll-free)
+   - Store Locations:
+     - COS East Oak Street, 46 East Oak Street, Chicago, IL 60611
+     - COS Buckhead Village, 3015 Bolling Way NE, Atlanta, GA 30305
+     - Operating Hours: Monday - Saturday: 11:00 AM - 7:00 PM, Sunday: 12:00 PM - 6:00 PM
+   - Description: COS is a fashion retail company that offers a range of clothing and accessories.
+
+2. Cos Bar Dallas
+   - Address: 8300 Preston Road Suite 600, University Park, TX 75225
+   - Phone Number: 214.238.4115
+   - Operating Hours: Monday - Saturday: 10:00 AM - 5:00 PM, Sunday: 12:00 PM - 5:00 PM
+   - Description: Cos Bar Dallas is a retail store that offers a variety of beauty and skincare products.
+
+3. Cosm
+   - Location: Dallas, TX
+   - Description: Cosm is a company...
+[36m📘 [INFO][0m Step 4: Final formatting with OpenAI...
+[36m📘 [INFO][0m [r7e3a] Progress: { step: 3, info: 'Preparing final results...' }
+[36m📘 [INFO][0m Final response received, length: 1227
+[36m📘 [INFO][0m Final response: "{\"companies\":[{\"name\":\"COS Stores\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Fashion Retail\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"\",\"tags\":[\"Fashion\",\"Retail\",\"Clothing\",\"Accessories\"]},{\"name\":\"Cos Bar Dallas\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"University Park, TX\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Beauty and Skincare Retail\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"\",\"tags\":[\"Beauty\",\"Skincare\",\"Retail\"]},{\"name\":\"Cosm\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Dallas, TX\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Filmmaking and Immersive Media\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"\",\"tags\":[\"Filmmaking\",\"Media\",\"Immersive\",\"Technology\"]},{\"name\":\"SHOP Companies\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Dallas, TX\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Real Estate\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"\",\"tags\":[\"Real Estate\",\"Retail\",\"Brokerage\",\"Development\",\"Acquisition\"]}]}"
+[32m✅ [SUCCESS][0m Successfully parsed final JSON, companies: {"companies":[{"name":"COS Stores","revenue":"","readiness":"","location":"","growth":"","employees":"","industry":"Fashion Retail","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Fashion","Retail","Clothing","Accessories"]},{"name":"Cos Bar Dallas","revenue":"","readiness":"","location":"University Park, TX","growth":"","employees":"","industry":"Beauty and Skincare Retail","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Beauty","Skincare","Retail"]},{"name":"Cosm","revenue":"","readiness":"","location":"Dallas, TX","growth":"","employees":"","industry":"Filmmaking and Immersive Media","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Filmmaking","Media","Immersive","Technology"]},{"name":"SHOP Companies","revenue":"","readiness":"","location":"Dallas, TX","growth":"","employees":"","industry":"Real Estate","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Real Estate","Retail","Brokerage","Development","Acquisition"]}]}
+Successfully parsed final JSON, companies: {"companies":[{"name":"COS Stores","revenue":"","readiness":"","location":"","growth":"","employees":"","industry":"Fashion Retail","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Fashion","Retail","Clothing","Accessories"]},{"name":"Cos Bar Dallas","revenue":"","readiness":"","location":"University Park, TX","growth":"","employees":"","industry":"Beauty and Skincare Retail","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Beauty","Skincare","Retail"]},{"name":"Cosm","revenue":"","readiness":"","location":"Dallas, TX","growth":"","employees":"","industry":"Filmmaking and Immersive Media","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Filmmaking","Media","Immersive","Technology"]},{"name":"SHOP Companies","revenue":"","readiness":"","location":"Dallas, TX","growth":"","employees":"","industry":"Real Estate","logo":"","sources":{"count":0,"details":[]},"reasoning":"","tags":["Real Estate","Retail","Brokerage","Development","Acquisition"]}]}
+[32m✅ [SUCCESS][0m Companies: undefined
+[32m✅ [SUCCESS][0m [r7e3a] Analysis completed successfully
