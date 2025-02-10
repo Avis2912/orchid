@@ -113,11 +113,9 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
                     <p className="text-xs text-gray-500">{company.industry}</p>
                   </div>
                   <div>
-                    <div className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-1">
-                      <span className="text-xs font-medium text-emerald-700">
-                        {company.readiness} Ready
-                      </span>
-                    </div>
+                    <span className="text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded">
+                      {company.readiness} Ready
+                    </span>
                   </div>
                   <div className="flex items-center gap-2">
                     <span className="text-sm text-gray-500 flex items-center gap-1.5">

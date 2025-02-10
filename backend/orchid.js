@@ -37,29 +37,69 @@ const log = {
     success: (...args) => console.log('\x1b[32m%s\x1b[0m', '✅ [SUCCESS]', ...args)
 };
 
+
 async function runDeepAnalysisFlow(userQuery, onProgress) {
+
+    let plannedSteps;
+
     try {
         log.info('Starting analysis for query:', userQuery);
-        const steps = [
-            "Planning analysis approach",
-            "Gathering initial company data",
-            "Enriching company information",
-            "Finalizing recommendations"
-        ];
+        
         const partialResults = [];
+        const analysisSchema = {
+            type: "object",
+            properties: {
+                steps: {
+                    type: "array",
+                    items: {
+                        type: "object",
+                        properties: {
+                            step: { type: "integer" },
+                            step_title: { type: "string" },
+                            queries: {
+                                type: "array",
+                                items: { type: "string" }
+                            },
+                        },
+                        required: ["step", "step_title", "queries"],
+                        additionalProperties: false
+                    }
+                }
+            },
+            additionalProperties: false,
+            required: ["steps"]
+        };
 
-        // // Step 1: Plan using Claude
-        // log.info('Step 1: Planning with Claude...');
-        // onProgress?.({ step: 0, info: "Planning search strategy..." });
-        // const planResponse = await claudeAPI({
-        //     messages: [{
-        //         role: 'user',
-        //         content: `Given this search query: "${userQuery}", create a brief search strategy focusing on finding companies.`
-        //     }],
-        //     model: 1
-        // });
-        // log.info('Claude planning response:', planResponse?.choices?.[0]?.message?.content?.slice(0, 100) + '...');
-        // partialResults.push({ step: steps[0], info: planResponse?.choices?.[0]?.message?.content || "Plan created" });
+        // Step 1: Plan using OpenAI
+        log.info('Step 1: Planning with o3...');
+        onProgress?.({ step: 0, info: "Planning search strategy..." });
+        const planResponse = await openAIAPI({
+            messages: [{
+                role: 'user',
+                content: `Given this search query: "${userQuery}", 
+                create a 5-8 point search strategy (including all queries) focusing on finding all the right companies.
+                Not each step must have queries attached, but every step involving searching should have them attached. 
+                When attaching queries, know that these are queries that the model will then run on google to find relevant articles to research further.
+                When attaching queries, always attach 9-12 of them.`
+            }],
+            model: 1,
+            responseSchema: analysisSchema
+        });
+    
+        log.info('Analysis Planning response:', planResponse?.choices?.[0]?.message?.content + '...');
+        
+        try {
+            plannedSteps = typeof planResponse?.choices?.[0]?.message?.content === 'string' ? JSON.parse(planResponse.choices[0].message.content) : planResponse.choices[0].message.content;
+        } catch (err) {
+            log.error('Error parsing plan response as JSON:', err);
+            plannedSteps = { steps: [] };
+        }
+        
+        log.info('Steps planned:', plannedSteps?.steps);
+        partialResults.push({ step: 1, info: planResponse?.choices?.[0]?.message?.content || "Plan created" });
+
+        // Log the planned steps to the console immediately
+        console.log('Planned Steps:', plannedSteps?.steps);
 
         // Step 2: Search using You.com cloud function
         log.info('Step 2: Searching You.com...');
@@ -76,7 +116,7 @@ async function runDeepAnalysisFlow(userQuery, onProgress) {
 
         log.info(`Found ${searchResults?.hits?.length || 0} results from You.com`);
         log.info('First result:', searchResults?.hits?.[0]);
-        partialResults.push({ step: steps[1], info: `Found ${searchResults?.hits?.length || 0} potential matches` });
+        partialResults.push({ step: 1, info: `Found ${searchResults?.hits?.length || 0} potential matches` });
 
         // Step 3: Enrich with Claude
         log.info('Step 3: Enriching data with Claude...');
@@ -86,10 +126,10 @@ async function runDeepAnalysisFlow(userQuery, onProgress) {
                 role: 'user',
                 content: `Based on these search results, generate a list of potential company leads with detailed information: ${JSON.stringify(searchResults?.hits?.slice(0, 5))}`
             }],
-            model: 1
+            model: 1,
         });
         log.info('Enrichment response:', enrichResponse?.choices?.[0]?.message?.content?.slice(0, 1000) + '...');
-        partialResults.push({ step: steps[2], info: "Enhanced company profiles" });
+        partialResults.push({ step: 2, info: "Enhanced company profiles" });
 
         // Step 4: Final formatting with OpenAI
         log.info('Step 4: Final formatting with OpenAI...');
@@ -142,7 +182,7 @@ async function runDeepAnalysisFlow(userQuery, onProgress) {
                         },
                         "required": ["name", "revenue", "readiness", "location", "growth", 
                                 "employees", "industry", "logo", "sources", "reasoning", 
-                                "tags",],
+                                "tags"],
                         "additionalProperties": false
                     }
                 }
@@ -171,9 +211,9 @@ async function runDeepAnalysisFlow(userQuery, onProgress) {
             log.success('Successfully parsed final JSON, companies:', parsed);
             console.log('Successfully parsed final JSON, companies:', parsed);
             log.success('Companies:', parsed.companies);
-            partialResults.push({ step: steps[3], info: "Results formatted" });
+            partialResults.push({ step: 3, info: "Results formatted" });
             return {
-                steps,
+                steps: plannedSteps.steps,
                 partialResults,
                 finalAnswer: finalContent
             };

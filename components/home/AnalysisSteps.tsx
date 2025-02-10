@@ -3,83 +3,14 @@ import { CheckCircle2, Loader2 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 interface AnalysisStepsProps {
-  analysisSteps: string[];
+  analysisSteps: { step_title: string, queries: string[] }[];
   currentStep: number;
   completedSteps: number[];
 }
 
-const dummyQueries = [
-  [
-    "Fetching market size for Idaho",
-    "Analyzing competitor landscape",
-    "Identifying key industry trends",
-    "Gathering demographic data",
-    "Scraping local business directories",
-    "Checking economic indicators",
-    "Processing regional statistics",
-    "Evaluating market saturation",
-    "Analyzing growth potential"
-  ],
-  [
-    "Calculating revenue growth rates",
-    "Analyzing profit margins",
-    "Reviewing balance sheets",
-    "Assessing debt-to-equity ratios",
-    "Evaluating cash flow statements",
-    "Projecting future earnings",
-    "Analyzing operational costs",
-    "Checking investment history",
-    "Evaluating funding rounds"
-  ],
-  [
-    "Evaluating tech adoption rates",
-    "Assessing digital maturity",
-    "Analyzing customer feedback",
-    "Checking online presence",
-    "Reviewing marketing strategies",
-    "Measuring brand awareness",
-    "Analyzing tech stack",
-    "Evaluating digital footprint",
-    "Checking integration readiness"
-  ],
-  [
-    "Analyzing YoY growth",
-    "Evaluating market penetration",
-    "Assessing scalability",
-    "Reviewing expansion plans",
-    "Measuring customer acquisition cost",
-    "Identifying new market opportunities",
-    "Analyzing hiring patterns",
-    "Checking office expansions",
-    "Evaluating partnership potential"
-  ],
-  [
-    "Calculating weighted scores",
-    "Normalizing data points",
-    "Applying scoring algorithms",
-    "Identifying top opportunities",
-    "Ranking companies by potential",
-    "Generating opportunity heatmaps",
-    "Computing success probability",
-    "Analyzing competitive advantage",
-    "Calculating market fit score"
-  ],
-  [
-    "Compiling key findings",
-    "Generating actionable insights",
-    "Creating final recommendations",
-    "Preparing presentation slides",
-    "Formatting report data",
-    "Generating executive summary",
-    "Prioritizing opportunities",
-    "Creating action items",
-    "Finalizing recommendations"
-  ]
-];
-
 const AnalysisSteps: React.FC<AnalysisStepsProps> = ({ analysisSteps, currentStep, completedSteps }) => {
   const [elapsedSeconds, setElapsedSeconds] = useState(1);
-  const [currentQueries, setCurrentQueries] = useState(dummyQueries[0]);
+  const [currentQueries, setCurrentQueries] = useState<string[]>([]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -90,8 +21,8 @@ const AnalysisSteps: React.FC<AnalysisStepsProps> = ({ analysisSteps, currentSte
   }, []);
 
   useEffect(() => {
-    setCurrentQueries(dummyQueries[currentStep] || []);
-  }, [currentStep]);
+    setCurrentQueries(analysisSteps[currentStep]?.queries || []);
+  }, [currentStep, analysisSteps]);
 
   return (
     <motion.div 
@@ -115,7 +46,7 @@ const AnalysisSteps: React.FC<AnalysisStepsProps> = ({ analysisSteps, currentSte
         </div>
 
         {analysisSteps.map((step, index) => (
-          <div key={step} className="space-y-3">
+          <div key={index} className="space-y-3">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -135,7 +66,7 @@ const AnalysisSteps: React.FC<AnalysisStepsProps> = ({ analysisSteps, currentSte
                   <div className="h-5 w-5" />
                 )}
               </motion.div>
-              <span className="text-base text-gray-600">{step}</span>
+              <span className="text-base text-gray-600">{step.step_title}</span>
             </motion.div>
 
             {/* Animated Queries */}
@@ -149,7 +80,7 @@ const AnalysisSteps: React.FC<AnalysisStepsProps> = ({ analysisSteps, currentSte
                 >
                   {currentQueries.map((query, idx) => (
                     <motion.span
-                      key={query}
+                      key={idx}
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}

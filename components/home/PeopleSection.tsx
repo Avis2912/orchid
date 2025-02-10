@@ -125,6 +125,16 @@ const ExpandedPeopleSection: React.FC<ExpandedPeopleSectionProps> = ({ buyers })
               <span>•</span>
               <span className="text-gray-600">{buyer.responsibility}</span>
             </div>
+            {buyer.linkedin && (
+              <a
+                href={`https://linkedin.com/in/${buyer.linkedin}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600"
+              >
+                View LinkedIn
+              </a>
+            )}
           </div>
 
           {/* Right Section: Actions */}

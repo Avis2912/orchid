@@ -71,7 +71,7 @@ const openAIAPI = async (request) => {
                 response_format: {
                   type: "json_schema",
                   json_schema: {   
-                    name: "company_list",
+                    name: "company_list_or_analysis",
                     schema: responseSchema,
                     strict: true
                   }}

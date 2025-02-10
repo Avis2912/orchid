@@ -10,6 +10,7 @@ import SearchSettings from '@/components/home/SearchSettings';
 import { Search } from 'lucide-react';
 import Image from 'next/image';
 import { Users } from 'lucide-react';
+import { dummyCompanies, analysisSteps } from '@/app/data/dummyData';
 
 interface Buyer {
   name: string;
@@ -37,298 +38,6 @@ interface BuyerDetail extends Buyer {
   avatar?: string; // We'll use better avatars
 }
 
-const analysisSteps = [
-  "Scanning Idaho market data...",
-  "Analyzing company financials...",
-  "Evaluating market readiness...",
-  "Processing growth indicators...",
-  "Calculating opportunity scores...",
-  "Preparing final recommendations..."
-];
-
-const dummyCompanies = [
-  {
-    name: 'Alpine Tech Solutions',
-    revenue: '$2.3M',
-    readiness: '87%',
-    location: 'Boise',
-    growth: '+24% YoY',
-    employees: '45-50',
-    industry: 'Software Development',
-    logo: '🏔️',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'alpinetech.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led', 'Market Leader'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Idaho Innovators Inc',
-    revenue: '$1.8M',
-    readiness: '92%',
-    location: 'Meridian',
-    growth: '+31% YoY',
-    employees: '30-35',
-    industry: 'Tech Consulting',
-    logo: '💡',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'idahoinnovators.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Gem State Digital',
-    revenue: '$3.1M',
-    readiness: '85%',
-    location: 'Nampa',
-    growth: '+18% YoY',
-    employees: '60-70',
-    industry: 'Digital Marketing',
-    logo: '💎',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'gemstatedigital.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Mountain Data Systems',
-    revenue: '$4.2M',
-    readiness: '78%',
-    location: 'Idaho Falls',
-    growth: '+22% YoY',
-    employees: '80-90',
-    industry: 'Data Analytics',
-    logo: '📊',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'mountaindata.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Sawtooth Solutions',
-    revenue: '$2.7M',
-    readiness: '90%',
-    location: 'Twin Falls',
-    growth: '+28% YoY',
-    employees: '40-45',
-    industry: 'Cloud Services',
-    logo: '☁️',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'sawtoothsolutions.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Cascade Computing',
-    revenue: '$1.5M',
-    readiness: '95%',
-    location: 'Pocatello',
-    growth: '+35% YoY',
-    employees: '25-30',
-    industry: 'IT Services',
-    logo: '🌊',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'cascadecomputing.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-  {
-    name: 'Silver Valley Tech',
-    revenue: '$2.9M',
-    readiness: '82%',
-    location: 'Coeur d\'Alene',
-    growth: '+20% YoY',
-    employees: '50-55',
-    industry: 'Hardware Solutions',
-    logo: '⚡',
-    sources: {
-      count: 4,
-      details: [
-        { type: 'Website', url: 'silvervalleytech.com', date: '2 days ago', icon: Globe },
-        { type: 'Press Release', url: 'PR: Q2 Growth', date: 'Last week', icon: FileText },
-        { type: 'Blog Post', url: 'Tech Expansion Plans', date: '2 weeks ago', icon: Link },
-      ]
-    },
-    reasoning: "High growth rate combined with recent expansion signals readiness for new solutions. Their tech stack shows gaps in key areas matching your offering.",
-    tags: ['Series A', 'High Growth', 'Tech-enabled', 'Product-led'],
-    interactions: [
-      { type: 'Email Campaign', date: '2 weeks ago', details: 'Responded positively to cloud solutions', outcome: 'Positive' },
-      { type: 'Sales Call', date: 'Last month', details: 'Discussed implementation timeline', outcome: 'Neutral' },
-      { type: 'Demo Request', date: 'Yesterday', details: 'Requested product demo', outcome: 'Pending' },
-    ] as Interaction[],
-    buyers: [
-      {
-        name: 'Sarah Chen',
-        role: 'Head of Engineering',
-        timing: 'Active Search',
-        relevance: 'High',
-        imageUrl: 'https://randomuser.me/api/portraits/women/1.jpg',
-        title: 'Senior Director of Engineering',
-        responsibility: 'Leads technical infrastructure decisions and oversees cloud migration initiatives',
-        linkedin: 'sarahchen',
-        twitter: 'schen_tech'
-      },
-      { name: 'Michael Torres', role: 'VP Technology', timing: 'Planning Phase', relevance: 'High', imageUrl: 'https://randomuser.me/api/portraits/men/1.jpg', title: 'VP of Technology', responsibility: 'Oversees all technology-related operations and initiatives' },
-      { name: 'Jamie Roberts', role: 'Engineering Manager', timing: 'Evaluating', relevance: 'Medium', imageUrl: 'https://randomuser.me/api/portraits/men/2.jpg', title: 'Engineering Manager', responsibility: 'Manages engineering teams and evaluates new technologies' },
-    ] as BuyerDetail[]
-  },
-];
-
 import { Globe, Link, FileText } from 'lucide-react';
 
 const formatTime = (seconds: number) => {
@@ -355,6 +64,14 @@ export default function HomePage() {
     personData: true,
   });
   const [totalElapsedTime, setTotalElapsedTime] = useState(0);
+  const [analysisFlow, setAnalysisFlow] = useState<{ steps: string[]; partialResults: any[]; finalAnswer?: string }>({
+    steps: [],
+    partialResults: []
+  });
+  const [finalCompanies, setFinalCompanies] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const MAX_RETRIES = 1;
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -384,48 +101,98 @@ export default function HomePage() {
     handleSearch();
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (isSearching) return;
-
+    
+    setError(null);
     setIsSearching(true);
     setShowResults(false);
     setCurrentStep(0);
     setCompletedSteps([]);
+    setAnalysisFlow({ steps: [], partialResults: [] });
 
-    const interval = setInterval(() => {
-      setCurrentStep((prev) => {
-        const newStep = prev + 1;
-        setCompletedSteps(steps => [...steps, prev]);
+    const attemptFetch = async (attempt: number): Promise<any> => {
+        try {
+            console.log(`Attempting request ${attempt + 1}/${MAX_RETRIES}`);
+            
+            const response = await fetch('http://localhost:3699/api/deepAnalysis', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ query: searchQuery })
+            });
 
-        if (newStep >= analysisSteps.length) {
-          clearInterval(interval);
-          setTimeout(() => {
-            setIsSearching(false);
-            setShowResults(true);
-          }, 800); // Increased from 500
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.message || 'Server returned an error');
+            }
+
+            // Log the planned steps to the console immediately
+            console.log('Planned Steps:', data.results.steps);
+
+            return data;
+        } catch (err: any) {
+            console.error(`Attempt ${attempt + 1} failed:`, err);
+            if (attempt < MAX_RETRIES - 1) {
+                await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
+                return attemptFetch(attempt + 1);
+            }
+            throw err;
         }
-        return newStep;
-      });
-    }, 1200); // Increased from 800
-  };
+    };
+
+    try {
+        const data = await attemptFetch(0);
+        
+        // Update progress state
+        data.progress?.forEach((p: any, idx: number) => {
+            setCurrentStep(idx);
+            setCompletedSteps(prev => [...prev, idx]);
+        });
+
+        // Set final results
+        setAnalysisFlow({
+            steps: data.results.steps.map((step: any) => step.step_title),
+            partialResults: data.results.partialResults,
+            finalAnswer: JSON.stringify(data.results.companies)
+        });
+
+        setFinalCompanies(data.results.companies);
+        setShowResults(true);
+    } catch (err: any) {
+        setError(err.message || 'Failed to complete analysis');
+        console.error('Search failed:', err);
+    } finally {
+        setIsSearching(false);
+    }
+};
 
   return (
-    <div className="min-h-screen flex bg-white">
-      <Sidebar currentPage={currentPage} />
-      <div className="flex-1">
-        <div className="h-full flex items-center justify-center relative p-12">
-          {/* Golden background only shows on initial search screen */}
-          {!isSearching && !showResults && (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[120px] z-0">
-              <div
-                className="w-[800px] h-[250px] rounded-full blur-[120px]"
-                style={{
-                  background: 'radial-gradient(ellipse at center, rgba(255, 198, 10, 0.34), rgba(199, 149, 108, 0))'
-                }}
-              />
-            </div>
-          )}
+    <div className="h-screen w-screen flex bg-white overflow-hidden">
+      {/* Fixed Sidebar */}
+      <div className="w-64 fixed h-screen bg-white">
+        <Sidebar currentPage={currentPage} />
+      </div>
 
+      {/* Main content - with background effect container */}
+      <div className="flex-1 ml-64 h-screen overflow-y-auto scrollbar-hide relative" style={{ WebkitOverflowScrolling: 'touch' }}>
+        {/* Fixed background effect */}
+        {!isSearching && !showResults && (
+          <div className="fixed top-1/2 left-1/2 transform -translate-x-1/3 -translate-y-[120px] z-0 pointer-events-none">
+            <div
+              className="w-[800px] h-[250px] rounded-full blur-[120px]"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(255, 198, 10, 0.34), rgba(199, 149, 108, 0))'
+              }}
+            />
+          </div>
+        )}
+
+        {/* Scrollable content */}
+        <div className="min-h-screen flex items-center justify-center relative p-12">
           <div className="w-full max-w-5xl mx-auto relative z-10">
             <AnimatePresence mode="wait">
               {/* Search Input Section */}
@@ -504,7 +271,7 @@ export default function HomePage() {
                   className="flex items-center justify-center"
                 >
                   <AnalysisSteps
-                    analysisSteps={analysisSteps}
+                    analysisSteps={analysisFlow.steps.length ? analysisFlow.steps : analysisSteps}
                     currentStep={currentStep}
                     completedSteps={completedSteps}
                   />
@@ -525,15 +292,15 @@ export default function HomePage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500">
                       <span className="tabular-nums">Took {formatTime(totalElapsedTime)}</span>
                       <span>|</span>
-                      <p>Found {dummyCompanies.length} matches</p>
+                      <p>Found {finalCompanies.length} matches</p>
                     </div>
                   </div>
 
-                  <CompanyList companies={dummyCompanies} />
+                  <CompanyList companies={finalCompanies.length ? finalCompanies : dummyCompanies} />
 
                   {/* Updated CRM Button */}
                   <div className="mt-6 flex justify-end">
-                    <button className="flex items-center gap-2 px-2.5 py-1.5 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
+                    <button className="flex items-center gap-2 px-2.5 py-2 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors">
                       <Image
                         src="https://1000logos.net/wp-content/uploads/2017/08/Salesforce-logo.jpg"
                         alt="Salesforce"
@@ -551,6 +318,17 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      {error && (
+        <div className="fixed top-4 right-4 bg-red-50 text-red-600 px-4 py-2 rounded-md shadow-sm">
+          {error}
+          <button 
+            onClick={() => handleSearch()} 
+            className="ml-2 underline"
+          >
+            Retry
+          </button>
+        </div>
+      )}
     </div>
   );
 }
