@@ -37,66 +37,60 @@ const log = {
     success: (...args) => console.log('\x1b[32m%s\x1b[0m', '✅ [SUCCESS]', ...args)
 };
 
+async function planSearchStrategy(userQuery) {
+    const analysisSchema = {
+        type: "object",
+        properties: {
+            steps: {
+                type: "array",
+                items: {
+                    type: "object",
+                    properties: {
+                        step: { type: "integer" },
+                        step_title: { type: "string" },
+                        queries: {
+                            type: "array",
+                            items: { type: "string" }
+                        },
+                    },
+                    required: ["step", "step_title", "queries"],
+                    additionalProperties: false
+                }
+            }
+        },
+        additionalProperties: false,
+        required: ["steps"]
+    };
 
-async function runDeepAnalysisFlow(userQuery, onProgress) {
+    const planResponse = await openAIAPI({
+        messages: [{
+            role: 'user',
+            content: `Given this search query: "${userQuery}", 
+            create a 5-8 point search strategy (including all queries) focusing on finding all the right companies.
+            Not each step must have queries attached, but every step involving searching should have them attached. 
+            When attaching queries, know that these are queries that the model will then run on google to find relevant articles to research further.
+            When attaching queries, always attach 9-12 of them.`
+        }],
+        model: 1,
+        responseSchema: analysisSchema
+    });
 
     let plannedSteps;
+    try {
+        plannedSteps = typeof planResponse?.choices?.[0]?.message?.content === 'string' ? JSON.parse(planResponse.choices[0].message.content) : planResponse.choices[0].message.content;
+    } catch (err) {
+        log.error('Error parsing plan response as JSON:', err);
+        plannedSteps = { steps: [] };
+    }
 
+    return plannedSteps;
+}
+
+async function runDeepAnalysisFlow(userQuery, plannedSteps, onProgress) {
     try {
         log.info('Starting analysis for query:', userQuery);
         
         const partialResults = [];
-        const analysisSchema = {
-            type: "object",
-            properties: {
-                steps: {
-                    type: "array",
-                    items: {
-                        type: "object",
-                        properties: {
-                            step: { type: "integer" },
-                            step_title: { type: "string" },
-                            queries: {
-                                type: "array",
-                                items: { type: "string" }
-                            },
-                        },
-                        required: ["step", "step_title", "queries"],
-                        additionalProperties: false
-                    }
-                }
-            },
-            additionalProperties: false,
-            required: ["steps"]
-        };
-
-        // Step 1: Plan using OpenAI
-        log.info('Step 1: Planning with o3...');
-        onProgress?.({ step: 0, info: "Planning search strategy..." });
-        const planResponse = await openAIAPI({
-            messages: [{
-                role: 'user',
-                content: `Given this search query: "${userQuery}", 
-                create a 5-8 point search strategy (including all queries) focusing on finding all the right companies.
-                Not each step must have queries attached, but every step involving searching should have them attached. 
-                When attaching queries, know that these are queries that the model will then run on google to find relevant articles to research further.
-                When attaching queries, always attach 9-12 of them.`
-            }],
-            model: 1,
-            responseSchema: analysisSchema
-        });
-    
-        log.info('Analysis Planning response:', planResponse?.choices?.[0]?.message?.content + '...');
-        
-        try {
-            plannedSteps = typeof planResponse?.choices?.[0]?.message?.content === 'string' ? JSON.parse(planResponse.choices[0].message.content) : planResponse.choices[0].message.content;
-        } catch (err) {
-            log.error('Error parsing plan response as JSON:', err);
-            plannedSteps = { steps: [] };
-        }
-        
-        log.info('Steps planned:', plannedSteps?.steps);
-        partialResults.push({ step: 1, info: planResponse?.choices?.[0]?.message?.content || "Plan created" });
 
         // Log the planned steps to the console immediately
         console.log('Planned Steps:', plannedSteps?.steps);
@@ -229,6 +223,11 @@ async function runDeepAnalysisFlow(userQuery, onProgress) {
     }
 }
 
+module.exports = {
+    planSearchStrategy,
+    runDeepAnalysisFlow
+};
+
 const startServer = async () => {
     try {
         log.info('Starting server...');
@@ -249,23 +248,42 @@ const startServer = async () => {
         
         app.get('/health', (_, res) => res.send('OK'));
 
-        // Add error handling middleware
-        app.use((err, req, res, next) => {
-            log.error('Server error:', err);
-            res.status(500).json({
-                error: 'Server error',
-                message: err.message,
-                step: err.step // Track which step failed
-            });
+        // Add new planning endpoint
+        app.post('/api/plan', async (req, res) => {
+            const requestId = Math.random().toString(36).substring(7);
+            log.info(`[${requestId}] New plan request:`, req.body?.query);
+            
+            try {
+                const { query } = req.body || {};
+                if (!query?.trim()) {
+                    return res.status(400).json({ error: 'Invalid query' });
+                }
+
+                const plannedSteps = await planSearchStrategy(query);
+                log.success(`[${requestId}] Planning completed`);
+                
+                res.json({
+                    success: true,
+                    steps: plannedSteps.steps
+                });
+
+            } catch (error) {
+                log.error(`[${requestId}] Planning failed:`, error);
+                res.status(500).json({
+                    success: false,
+                    error: 'Planning failed',
+                    message: error.message
+                });
+            }
         });
 
         // Wrap runDeepAnalysisFlow in better error handling
         app.post('/api/deepAnalysis', async (req, res) => {
             const requestId = Math.random().toString(36).substring(7);
+            const { query, steps: clientSteps } = req.body; // Get steps from client
             log.info(`[${requestId}] New request received:`, req.body?.query);
             
             try {
-                const { query } = req.body || {};
                 if (!query?.trim()) {
                     log.warn(`[${requestId}] Empty query received`);
                     return res.status(400).json({ 
@@ -274,9 +292,9 @@ const startServer = async () => {
                     });
                 }
 
-                // Track progress locally instead of streaming
+                // Remove the planSearchStrategy call and use client-provided steps
                 const progressUpdates = [];
-                const results = await runDeepAnalysisFlow(query, (progress) => {
+                const results = await runDeepAnalysisFlow(query, { steps: clientSteps }, (progress) => {
                     log.info(`[${requestId}] Progress:`, progress);
                     progressUpdates.push(progress);
                 });

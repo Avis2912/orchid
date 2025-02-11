@@ -11,6 +11,7 @@ import { Search } from 'lucide-react';
 import Image from 'next/image';
 import { Users } from 'lucide-react';
 import { dummyCompanies, analysisSteps } from '@/app/data/dummyData';
+import { planSearchStrategy, runDeepAnalysisFlow } from '@/backend/orchid';
 
 interface Buyer {
   name: string;
@@ -20,7 +21,6 @@ interface Buyer {
 }
 
 interface Interaction {
-  type: string;
   date: string;
   details: string;
   outcome: 'Positive' | 'Neutral' | 'Pending';
@@ -64,7 +64,7 @@ export default function HomePage() {
     personData: true,
   });
   const [totalElapsedTime, setTotalElapsedTime] = useState(0);
-  const [analysisFlow, setAnalysisFlow] = useState<{ steps: string[]; partialResults: any[]; finalAnswer?: string }>({
+  const [analysisFlow, setAnalysisFlow] = useState<{ steps: { step_title: string; queries: string[] }[]; partialResults: any[]; finalAnswer?: string }>({
     steps: [],
     partialResults: []
   });
@@ -111,14 +111,14 @@ export default function HomePage() {
     setCompletedSteps([]);
     setAnalysisFlow({ steps: [], partialResults: [] });
 
-    const attemptFetch = async (attempt: number): Promise<any> => {
+    const attemptFetch = async (url: string, body: any, attempt: number): Promise<any> => {
         try {
             console.log(`Attempting request ${attempt + 1}/${MAX_RETRIES}`);
             
-            const response = await fetch('http://localhost:3699/api/deepAnalysis', {
+            const response = await fetch(url, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ query: searchQuery })
+                body: JSON.stringify(body)
             });
 
             if (!response.ok) {
@@ -130,38 +130,63 @@ export default function HomePage() {
                 throw new Error(data.message || 'Server returned an error');
             }
 
-            // Log the planned steps to the console immediately
-            console.log('Planned Steps:', data.results.steps);
-
             return data;
+
         } catch (err: any) {
             console.error(`Attempt ${attempt + 1} failed:`, err);
             if (attempt < MAX_RETRIES - 1) {
                 await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 1000));
-                return attemptFetch(attempt + 1);
+                return attemptFetch(url, body, attempt + 1);
             }
             throw err;
         }
     };
 
     try {
-        const data = await attemptFetch(0);
-        
+        // Phase 1: Get search plan
+        const planData = await attemptFetch(
+            'http://localhost:3699/api/plan',
+            { query: searchQuery },
+            0
+        );
+
+        // Immediately log and show planned steps
+        console.log('Planned Steps:', planData.steps);
+        setAnalysisFlow(prev => ({
+            ...prev,
+            steps: planData.steps.map((step: any) => ({
+                step_title: step.step_title,
+                queries: step.queries || []
+            }))
+        }));
+        setCurrentStep(0);
+
+        // Phase 2: Execute analysis with received plan
+        const analysisData = await attemptFetch(
+            'http://localhost:3699/api/deepAnalysis',
+            {
+                query: searchQuery,
+                steps: planData.steps
+            },
+            0
+        );
+
         // Update progress state
-        data.progress?.forEach((p: any, idx: number) => {
+        analysisData.progress?.forEach((p: any, idx: number) => {
             setCurrentStep(idx);
             setCompletedSteps(prev => [...prev, idx]);
         });
 
         // Set final results
-        setAnalysisFlow({
-            steps: data.results.steps.map((step: any) => step.step_title),
-            partialResults: data.results.partialResults,
-            finalAnswer: JSON.stringify(data.results.companies)
-        });
+        setAnalysisFlow(prev => ({
+            ...prev,
+            partialResults: analysisData.results.partialResults,
+            finalAnswer: JSON.stringify(analysisData.results.companies)
+        }));
 
-        setFinalCompanies(data.results.companies);
+        setFinalCompanies(analysisData.results.companies);
         setShowResults(true);
+
     } catch (err: any) {
         setError(err.message || 'Failed to complete analysis');
         console.error('Search failed:', err);
@@ -271,7 +296,7 @@ export default function HomePage() {
                   className="flex items-center justify-center"
                 >
                   <AnalysisSteps
-                    analysisSteps={analysisFlow.steps.length ? analysisFlow.steps : analysisSteps}
+                    analysisSteps={analysisFlow.steps.length > 0 ? analysisFlow.steps : analysisSteps}
                     currentStep={currentStep}
                     completedSteps={completedSteps}
                   />
