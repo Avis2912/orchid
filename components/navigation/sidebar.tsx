@@ -1,6 +1,6 @@
 'use client';
 
-import { Home, Bell, ChevronLeft, ChevronRight, Play, ChevronDown } from 'lucide-react';
+import { Home, Bell, ChevronLeft, ChevronRight, Play, ChevronDown, User, Search } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { twMerge } from 'tailwind-merge';
 import { useState } from 'react';
@@ -20,12 +20,17 @@ export function Sidebar({ currentPage }: SidebarProps) {
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const navItems = [
-    { icon: Home, label: 'Home', id: 'home' },
+    { icon: Search, label: 'Search', id: 'home' },
     { 
       icon: Bell, 
       label: 'Alerts', 
       id: 'alerts',
       badge: '7'
+    },
+    { 
+      icon: User, 
+      label: 'Accounts', 
+      id: 'accounts' // New Accounts link
     },
     {
       icon: Play, // Changed from FolderClosed to Play
@@ -38,7 +43,7 @@ export function Sidebar({ currentPage }: SidebarProps) {
         { label: 'Healthcare Sector', date: 'Jun 15' },
         { label: 'Enterprise Sales', date: 'Jun 12' },
       ]
-    }
+    },
   ];
 
   const navigateTo = (page: string) => {
@@ -46,6 +51,8 @@ export function Sidebar({ currentPage }: SidebarProps) {
       router.push('/alerts');
     } else if (page === 'home') {
       router.push('/');
+    } else if (page === 'accounts') {
+      router.push('/accounts');
     }
   };
 

@@ -230,7 +230,7 @@ export default function HomePage() {
                   className="w-full flex flex-col items-center px-28 space-y-5"
                 >
                   <h1 className="text-[42px] text-gray-600 tracking-tight font-[250] font-instrument-serif">
-                    Hi Avi - find your next customer
+                    Hi Avi - find your next account
                   </h1>
                   <form onSubmit={handleSubmit} className="w-full relative mx-auto">
                     <Search
@@ -238,7 +238,7 @@ export default function HomePage() {
                     />
                     <motion.input
                       type="text"
-                      placeholder="Find me customers likely ready to buy in Idaho..."
+                      placeholder="Find me idaho media companies with more than 25 ad sales employees..."
                       onFocus={() => setIsInputFocused(true)}
                       onBlur={() => setIsInputFocused(false)}
                       className={`

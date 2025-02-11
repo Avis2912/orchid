@@ -314,3 +314,136 @@ Planned Steps: [
 Successfully parsed final JSON, companies: {"companies":[{"name":"EnergyBot","revenue":"","readiness":"","location":"Dallas, Texas","growth":"","employees":"","industry":"Energy","logo":"","sources":{"count":0,"details":[]},"reasoning":"EnergyBot is a specialized online marketplace that focuses on helping businesses find the most cost-effective commercial electricity rates by utilizing utility data. Their platform could be particularly beneficial for businesses looking to reduce energy expenses in Dallas.","tags":["electricity","energy","marketplace"]},{"name":"Choose Energy","revenue":"","readiness":"","location":"Dallas, Texas","growth":"","employees":"","industry":"Energy","logo":"","sources":{"count":0,"details":[]},"reasoning":"Choose Energy offers a platform for customers to compare and select electricity plans from multiple providers, making it a valuable tool for both residential and commercial users aiming to optimize their energy spending in Dallas.","tags":["electricity","energy","comparison"]},{"name":"EcoWatch","revenue":"","readiness":"","location":"Dallas, Texas","growth":"","employees":"","industry":"Energy","logo":"","sources":{"count":0,"details":[]},"reasoning":"By focusing on renewable energy plans and providing comprehensive rate comparisons, EcoWatch caters to environmentally conscious consumers and businesses interested in sustainable energy solutions in Dallas.","tags":["electricity","renewable","sustainable"]},{"name":"MarketWatch","revenue":"","readiness":"","location":"Dallas, Texas","growth":"","employees":"","industry":"Financial Information","logo":"","sources":{"count":0,"details":[]},"reasoning":"While primarily a financial information site, MarketWatch offers insights into electricity rates and consumer behaviors, which can aid in decision-making processes for residents and businesses considering energy provider switches in Dallas.","tags":["financial","electricity","analysis"]},{"name":"EnergySage","revenue":"","readiness":"","location":"Dallas, Texas","growth":"","employees":"","industry":"Energy","logo":"","sources":{"count":0,"details":[]},"reasoning":"EnergySage provides transparent data on electricity costs and consumption in Dallas, helping residents and businesses make informed decisions regarding energy use and budgeting.","tags":["electricity","data","decision-making"]}]}
 [32m✅ [SUCCESS][0m Companies: undefined
 [32m✅ [SUCCESS][0m [o1q8ea] Analysis completed successfully
+[36m📘 [INFO][0m [y0pbi] New plan request: dallas energy cos w more than 25 employees
+[32m✅ [SUCCESS][0m [y0pbi] Planning completed
+[36m📘 [INFO][0m [25v2sr] New request received: dallas energy cos w more than 25 employees
+[36m📘 [INFO][0m Starting analysis for query: dallas energy cos w more than 25 employees
+Planned Steps: [
+  {
+    step: 1,
+    step_title: 'Identify Relevant Databases and Directories',
+    queries: [
+      'Dallas energy companies',
+      'Dallas area businesses with over 25 employees',
+      'energy sector companies in Dallas',
+      'business directories for Dallas',
+      'corporate registries Dallas',
+      'Dallas Chamber of Commerce members',
+      'energy industry listings Texas',
+      'Dallas employer search',
+      'businesses in Dallas by employee size',
+      'energy firms in Dallas'
+    ]
+  },
+  {
+    step: 2,
+    step_title: 'Search Local Business Listings',
+    queries: [
+      'Dallas energy companies in Google Maps',
+      'Dallas business listings with employee counts',
+      'local Dallas businesses with 25+ employees',
+      'Dallas energy sector companies profiles',
+      'B2B companies in Dallas energy',
+      'Dallas energy providers company size',
+      'find energy companies in Dallas',
+      'Dallas businesses over 25 employees',
+      'Texas energy companies directory'
+    ]
+  },
+  {
+    step: 3,
+    step_title: 'Utilize Industry Reports and Publications',
+    queries: [
+      'Dallas energy industry report',
+      'Texas energy sector analysis 2023',
+      'energy companies report Dallas',
+      'list of energy companies Texas',
+      'annual reports Dallas energy firms',
+      'Dallas energy workforce statistics',
+      'energy sector employment in Dallas',
+      'key players in Dallas energy market',
+      'business insights Dallas energy sector'
+    ]
+  },
+  {
+    step: 4,
+    step_title: 'Engage with Professional Networking Platforms',
+    queries: [
+      'LinkedIn Dallas energy companies',
+      'Dallas energy professionals network',
+      'employee size of Dallas energy companies on LinkedIn',
+      'Dallas energy sector workforce',
+      'business profiles in Dallas on LinkedIn',
+      'energy industry connections in Dallas',
+      'Dallas companies hiring in energy sector',
+      'Dallas energy companies list on LinkedIn',
+      'employees in energy firms Dallas'
+    ]
+  },
+  {
+    step: 5,
+    step_title: 'Assess Government and Regulatory Filings',
+    queries: [
+      'Texas Energy Regulation Commission registered companies',
+      'Dallas business licenses energy sector',
+      'state filings for Dallas energy firms',
+      'Dallas energy companies compliance documents',
+      'Texas business structure energy industry',
+      'Dallas energy companies registered with UT System',
+      'government databases for energy firms Dallas',
+      'company filings in Dallas energy sector',
+      'Texan energy sector business registration'
+    ]
+  },
+  {
+    step: 6,
+    step_title: 'Analyze News Articles and Press Releases',
+    queries: [
+      'Dallas energy news',
+      'press releases from Dallas energy companies',
+      'recent developments in Dallas energy sector',
+      'Dallas energy firms news articles',
+      'events for energy companies in Dallas',
+      'Dallas energy sector updates',
+      'energy companies in Dallas news',
+      'Dallas energy market trends',
+      'latest projects by Dallas energy companies'
+    ]
+  },
+  {
+    step: 7,
+    step_title: 'Compile and Review Findings',
+    queries: [
+      'summarize Dallas energy companies with employee counts',
+      'detailed list Dallas energy firms with >25 employees',
+      'comparison of Dallas energy companies',
+      'employee strength of energy firms in Dallas',
+      'final review of significant Dallas energy players',
+      'research Dallas energy companies',
+      'Dallas energy employers database',
+      'Dallas energy firm profiles',
+      'statistical overview of Dallas energy companies'
+    ]
+  }
+]
+[36m📘 [INFO][0m Step 2: Searching You.com...
+[36m📘 [INFO][0m [25v2sr] Progress: { step: 1, info: 'Searching for companies...' }
+[36m📘 [INFO][0m Found 10 results from You.com
+[36m📘 [INFO][0m First result: {
+  ai_snippets: 'Weatherford is an Equal Opportunity Employer. Employment decisions are made without regard to race, color, religion, national or ethnic origin, sex, sexual orientation, gender identity or expression, age, disability, protected veteran status or other characteristics protected by law. ... Pioneer Natural Resources is a leading independent natural resources company shaping the future of energy. We produce low-cost and low-carbon-intensity oil and natural gas from Texas’ Permian Basin to provide reliable energy resources to communities around the world.',
+  description: 'Browse the top <strong>Energy</strong> &amp; Utilities companies in <strong>Dallas</strong>. Salaries, reviews, and more - all posted by <strong>employees</strong> working at the top <strong>Energy</strong> &amp; Utilities companies in <strong>Dallas</strong>. Apply to jobs near you.',
+  snippet: 'Weatherford is an Equal Opportunity Employer. Employment decisions are made without regard to race, color, religion, national or ethnic origin, sex, sexual orientation, gender identity or expression, age, disability, protected veteran status or other characteristics protected by law. ... Pioneer Natural Resources is a leading independent natural resources company shaping the future of energy. We produce low-cost and low-carbon-intensity oil and natural gas from Texas’ Permian Basin to provide reliable energy resources to communities around the world.',
+  title: 'Top Energy & Utilities Companies in Dallas | Glassdoor',
+  url: 'https://www.glassdoor.com/Explore/top-energy-and-utilities-companies-dallas_II.4,24_IIND200091_IL.35,41_IM218.htm'
+}
+[36m📘 [INFO][0m Step 3: Enriching data with Claude...
+[36m📘 [INFO][0m [25v2sr] Progress: { step: 2, info: 'Analyzing companies...' }
+[36m📘 [INFO][0m Enrichment response: Internal Server Error...
+[36m📘 [INFO][0m Step 4: Final formatting with OpenAI...
+[36m📘 [INFO][0m [25v2sr] Progress: { step: 3, info: 'Preparing final results...' }
+[36m📘 [INFO][0m Final response received, length: 2337
+[36m📘 [INFO][0m Final response: "{\"companies\":[{\"name\":\"Tech Innovations Ltd.\",\"revenue\":\"$50M\",\"readiness\":\"High\",\"location\":\"Silicon Valley, CA\",\"growth\":\"20%\",\"employees\":\"300\",\"industry\":\"Technology\",\"logo\":\"tech_innovations_logo.png\",\"sources\":{\"count\":3,\"details\":[{\"type\":\"article\",\"url\":\"https://www.technews.com/articles/tech-innovations-earnings\",\"date\":\"2023-10-01\",\"icon\":\"article_icon.png\"},{\"type\":\"press release\",\"url\":\"https://www.techinnovations.com/news/2023-earnings\",\"date\":\"2023-09-28\",\"icon\":\"press_icon.png\"},{\"type\":\"industry report\",\"url\":\"https://www.industryanalysis.com/reports/tech2023\",\"date\":\"2023-09-15\",\"icon\":\"report_icon.png\"}]},\"reasoning\":\"The company is poised for growth due to its strong R&D department, recent expansion into AI, and acquisition of smaller start-ups.\",\"tags\":[\"growth potential\",\"AI expansion\",\"innovation\"]},{\"name\":\"Green Earth Enterprises\",\"revenue\":\"$120M\",\"readiness\":\"Moderate\",\"location\":\"Austin, TX\",\"growth\":\"5%\",\"employees\":\"1500\",\"industry\":\"Renewable Energy\",\"logo\":\"green_earth_logo.png\",\"sources\":{\"count\":2,\"details\":[{\"type\":\"article\",\"url\":\"https://www.renewableinsights.com/green-earth-growth\",\"date\":\"2023-09-20\",\"icon\":\"article_icon.png\"},{\"type\":\"podcast\",\"url\":\"https://www.energytalks.com/episodes/green-earth-interview\",\"date\":\"2023-09-18\",\"icon\":\"podcast_icon.png\"}]},\"reasoning\":\"Stable but slow growth due to regulatory approvals needed for new projects and competition in sustainable products.\",\"tags\":[\"stable growth\",\"regulatory challenges\",\"sustainability\"]},{\"name\":\"FinPro Solutions Inc.\",\"revenue\":\"$300M\",\"readiness\":\"Low\",\"location\":\"New York, NY\",\"growth\":\"-1%\",\"employees\":\"500\",\"industry\":\"Financial Services\",\"logo\":\"finpro_solutions_logo.png\",\"sources\":{\"count\":1,\"details\":[{\"type\":\"news report\",\"url\":\"https://www.financialdaily.com/news/finpro-q3-results\",\"date\":\"2023-09-25\",\"icon\":\"news_icon.png\"}]},\"reasoning\":\"Declining revenues over the last quarter as a result of market volatility and technological lag in updating their platforms.\",\"tags\":[\"declining performance\",\"market volatility\",\"tech upgrades needed\"]}]}"
+[32m✅ [SUCCESS][0m Successfully parsed final JSON, companies: {"companies":[{"name":"Tech Innovations Ltd.","revenue":"$50M","readiness":"High","location":"Silicon Valley, CA","growth":"20%","employees":"300","industry":"Technology","logo":"tech_innovations_logo.png","sources":{"count":3,"details":[{"type":"article","url":"https://www.technews.com/articles/tech-innovations-earnings","date":"2023-10-01","icon":"article_icon.png"},{"type":"press release","url":"https://www.techinnovations.com/news/2023-earnings","date":"2023-09-28","icon":"press_icon.png"},{"type":"industry report","url":"https://www.industryanalysis.com/reports/tech2023","date":"2023-09-15","icon":"report_icon.png"}]},"reasoning":"The company is poised for growth due to its strong R&D department, recent expansion into AI, and acquisition of smaller start-ups.","tags":["growth potential","AI expansion","innovation"]},{"name":"Green Earth Enterprises","revenue":"$120M","readiness":"Moderate","location":"Austin, TX","growth":"5%","employees":"1500","industry":"Renewable Energy","logo":"green_earth_logo.png","sources":{"count":2,"details":[{"type":"article","url":"https://www.renewableinsights.com/green-earth-growth","date":"2023-09-20","icon":"article_icon.png"},{"type":"podcast","url":"https://www.energytalks.com/episodes/green-earth-interview","date":"2023-09-18","icon":"podcast_icon.png"}]},"reasoning":"Stable but slow growth due to regulatory approvals needed for new projects and competition in sustainable products.","tags":["stable growth","regulatory challenges","sustainability"]},{"name":"FinPro Solutions Inc.","revenue":"$300M","readiness":"Low","location":"New York, NY","growth":"-1%","employees":"500","industry":"Financial Services","logo":"finpro_solutions_logo.png","sources":{"count":1,"details":[{"type":"news report","url":"https://www.financialdaily.com/news/finpro-q3-results","date":"2023-09-25","icon":"news_icon.png"}]},"reasoning":"Declining revenues over the last quarter as a result of market volatility and technological lag in updating their platforms.","tags":["declining performance","market volatility","tech upgrades needed"]}]}
+Successfully parsed final JSON, companies: {"companies":[{"name":"Tech Innovations Ltd.","revenue":"$50M","readiness":"High","location":"Silicon Valley, CA","growth":"20%","employees":"300","industry":"Technology","logo":"tech_innovations_logo.png","sources":{"count":3,"details":[{"type":"article","url":"https://www.technews.com/articles/tech-innovations-earnings","date":"2023-10-01","icon":"article_icon.png"},{"type":"press release","url":"https://www.techinnovations.com/news/2023-earnings","date":"2023-09-28","icon":"press_icon.png"},{"type":"industry report","url":"https://www.industryanalysis.com/reports/tech2023","date":"2023-09-15","icon":"report_icon.png"}]},"reasoning":"The company is poised for growth due to its strong R&D department, recent expansion into AI, and acquisition of smaller start-ups.","tags":["growth potential","AI expansion","innovation"]},{"name":"Green Earth Enterprises","revenue":"$120M","readiness":"Moderate","location":"Austin, TX","growth":"5%","employees":"1500","industry":"Renewable Energy","logo":"green_earth_logo.png","sources":{"count":2,"details":[{"type":"article","url":"https://www.renewableinsights.com/green-earth-growth","date":"2023-09-20","icon":"article_icon.png"},{"type":"podcast","url":"https://www.energytalks.com/episodes/green-earth-interview","date":"2023-09-18","icon":"podcast_icon.png"}]},"reasoning":"Stable but slow growth due to regulatory approvals needed for new projects and competition in sustainable products.","tags":["stable growth","regulatory challenges","sustainability"]},{"name":"FinPro Solutions Inc.","revenue":"$300M","readiness":"Low","location":"New York, NY","growth":"-1%","employees":"500","industry":"Financial Services","logo":"finpro_solutions_logo.png","sources":{"count":1,"details":[{"type":"news report","url":"https://www.financialdaily.com/news/finpro-q3-results","date":"2023-09-25","icon":"news_icon.png"}]},"reasoning":"Declining revenues over the last quarter as a result of market volatility and technological lag in updating their platforms.","tags":["declining performance","market volatility","tech upgrades needed"]}]}
+[32m✅ [SUCCESS][0m Companies: undefined
+[32m✅ [SUCCESS][0m [25v2sr] Analysis completed successfully
