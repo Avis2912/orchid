@@ -66,10 +66,10 @@ async function planSearchStrategy(userQuery) {
         messages: [{
             role: 'user',
             content: `Given this search query: "${userQuery}", 
-            create a 5-8 point search strategy (including all queries) focusing on finding all the right companies.
+            create a 5-7 point search strategy (including all queries) focusing on finding all the right companies.
             Not each step must have queries attached, but every step involving searching should have them attached. 
             When attaching queries, know that these are queries that the model will then run on google to find relevant articles to research further.
-            When attaching queries, always attach 9-12 of them.`
+            When attaching queries, always attach 6-9 of them.`
         }],
         model: 1,
         responseSchema: analysisSchema
@@ -122,7 +122,7 @@ async function runDeepAnalysisFlow(userQuery, plannedSteps, onProgress) {
             }],
             model: 1,
         });
-        log.info('Enrichment response:', enrichResponse?.choices?.[0]?.message?.content?.slice(0, 1000) + '...');
+        log.info('Enrichment response:', enrichResponse?.choices?.[0]?.message?.content + '...');
         partialResults.push({ step: 2, info: "Enhanced company profiles" });
 
         // Step 4: Final formatting with OpenAI

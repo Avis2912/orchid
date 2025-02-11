@@ -447,3 +447,150 @@ Planned Steps: [
 Successfully parsed final JSON, companies: {"companies":[{"name":"Tech Innovations Ltd.","revenue":"$50M","readiness":"High","location":"Silicon Valley, CA","growth":"20%","employees":"300","industry":"Technology","logo":"tech_innovations_logo.png","sources":{"count":3,"details":[{"type":"article","url":"https://www.technews.com/articles/tech-innovations-earnings","date":"2023-10-01","icon":"article_icon.png"},{"type":"press release","url":"https://www.techinnovations.com/news/2023-earnings","date":"2023-09-28","icon":"press_icon.png"},{"type":"industry report","url":"https://www.industryanalysis.com/reports/tech2023","date":"2023-09-15","icon":"report_icon.png"}]},"reasoning":"The company is poised for growth due to its strong R&D department, recent expansion into AI, and acquisition of smaller start-ups.","tags":["growth potential","AI expansion","innovation"]},{"name":"Green Earth Enterprises","revenue":"$120M","readiness":"Moderate","location":"Austin, TX","growth":"5%","employees":"1500","industry":"Renewable Energy","logo":"green_earth_logo.png","sources":{"count":2,"details":[{"type":"article","url":"https://www.renewableinsights.com/green-earth-growth","date":"2023-09-20","icon":"article_icon.png"},{"type":"podcast","url":"https://www.energytalks.com/episodes/green-earth-interview","date":"2023-09-18","icon":"podcast_icon.png"}]},"reasoning":"Stable but slow growth due to regulatory approvals needed for new projects and competition in sustainable products.","tags":["stable growth","regulatory challenges","sustainability"]},{"name":"FinPro Solutions Inc.","revenue":"$300M","readiness":"Low","location":"New York, NY","growth":"-1%","employees":"500","industry":"Financial Services","logo":"finpro_solutions_logo.png","sources":{"count":1,"details":[{"type":"news report","url":"https://www.financialdaily.com/news/finpro-q3-results","date":"2023-09-25","icon":"news_icon.png"}]},"reasoning":"Declining revenues over the last quarter as a result of market volatility and technological lag in updating their platforms.","tags":["declining performance","market volatility","tech upgrades needed"]}]}
 [32m✅ [SUCCESS][0m Companies: undefined
 [32m✅ [SUCCESS][0m [25v2sr] Analysis completed successfully
+[36m📘 [INFO][0m [fw3zoks] New plan request: Find me idaho media companies with more than 25 ad sales employees
+[32m✅ [SUCCESS][0m [fw3zoks] Planning completed
+[36m📘 [INFO][0m [h1srko] New request received: Find me idaho media companies with more than 25 ad sales employees
+[36m📘 [INFO][0m Starting analysis for query: Find me idaho media companies with more than 25 ad sales employees
+Planned Steps: [
+  {
+    step: 1,
+    step_title: 'Identify the industry and region',
+    queries: []
+  },
+  {
+    step: 2,
+    step_title: 'Search for media companies in Idaho',
+    queries: [
+      'media companies in Idaho',
+      'Idaho advertising agencies',
+      'Idaho media firms',
+      'Idaho radio and TV stations',
+      'Idaho digital marketing companies',
+      'Idaho newspaper companies',
+      'list of media companies in Idaho',
+      'Idaho media business directory',
+      'Idaho advertising firms',
+      'Idaho broadcasting companies'
+    ]
+  },
+  {
+    step: 3,
+    step_title: 'Find company information on employee count',
+    queries: [
+      'Idaho media companies employee count',
+      'media companies with large teams in Idaho',
+      'Idaho advertising agencies number of employees',
+      'Idaho media firms workforce details',
+      'media companies in Idaho employee statistics',
+      'how many employees do Idaho media companies have',
+      'Idaho media companies size',
+      'media advertising agencies with 25+ employees in Idaho',
+      'Idaho media companies with large sales teams'
+    ]
+  },
+  {
+    step: 4,
+    step_title: 'Explore company profiles on business listing sites',
+    queries: [
+      'LinkedIn media companies in Idaho',
+      'Yellow Pages Idaho media',
+      'Manta Idaho media companies',
+      'Idaho media firms on Crunchbase',
+      'Idaho advertising companies on Yelp',
+      'Idaho media profiles on Indeed',
+      'Idaho company size listings',
+      'Idaho ad agencies on Great Place to Work',
+      'Idaho local businesses media companies',
+      'Idaho newspaper listings on Media Directory'
+    ]
+  },
+  {
+    step: 5,
+    step_title: 'Check local business directories and databases',
+    queries: [
+      'Idaho Chamber of Commerce media companies',
+      'Idaho media association member companies',
+      'Idaho business data on sales employees',
+      'local Idaho advertising company rankings',
+      'Idaho media industry statistics',
+      'Idaho economic development media firms',
+      'Idaho digital marketing companies directory',
+      'Idaho business directory media sales employees',
+      'Idaho media company employee percentage',
+      'Idaho business listings with employee counts'
+    ]
+  },
+  {
+    step: 6,
+    step_title: 'Verify the findings through company websites',
+    queries: [
+      'direct websites of Idaho advertising companies',
+      'Idaho media companies about us pages',
+      'employee information on Idaho media websites',
+      'Idaho media companies job postings',
+      'Idaho ad sales team profiles',
+      'Idaho media corporate structure',
+      'media websites with team size disclosures',
+      'Idaho media company press releases',
+      'Idaho media firms with contact info',
+      'Idaho advertising agencies careers page'
+    ]
+  },
+  {
+    step: 7,
+    step_title: 'Analyze for additional information or changes',
+    queries: [
+      'Idaho media trends 2023',
+      'latest news Idaho media companies',
+      'employee count changes in Idaho advertising',
+      'new media companies in Idaho',
+      'Idaho advertising workforce growth',
+      'Idaho media industry reports',
+      'trends in Idaho media employment',
+      'Idaho media company expansions',
+      'Idaho advertising agency updates',
+      'forecasts for Idaho media job market'
+    ]
+  }
+]
+[36m📘 [INFO][0m Step 2: Searching You.com...
+[36m📘 [INFO][0m [h1srko] Progress: { step: 1, info: 'Searching for companies...' }
+[36m📘 [INFO][0m Found 10 results from You.com
+[36m📘 [INFO][0m First result: {
+  ai_snippets: 'SEO Idaho™, based in Boise, Idaho, is a distinguished company specializing in search engine optimization. Known for our integrity-driven approach, we offer a comprehensive suite of services… · including full-stack website development, custom programming, graphic design, paid advertisement marketing, and social media marketing.',
+  description: 'Looking for Marketing Agencies in <strong>Idaho</strong>? Here are the best ones listed just for you. Take a look at our list.',
+  snippet: 'SEO Idaho™, based in Boise, Idaho, is a distinguished company specializing in search engine optimization. Known for our integrity-driven approach, we offer a comprehensive suite of services… · including full-stack website development, custom programming, graphic design, paid advertisement marketing, and social media marketing.',
+  title: 'Top 25 Marketing Agencies in Idaho',
+  url: 'https://www.gappsy.com/marketing-agencies-in-idaho-united-states/'
+}
+[36m📘 [INFO][0m Step 3: Enriching data with Claude...
+[36m📘 [INFO][0m [h1srko] Progress: { step: 2, info: 'Analyzing companies...' }
+[36m📘 [INFO][0m Enrichment response: Based on the search results provided, here is a list of potential company leads with detailed information:
+
+1. SEO Idaho™
+   - Location: Boise, Idaho
+   - Specialties: Search engine optimization, full-stack website development, custom programming, graphic design, paid advertisement marketing, and social media marketing
+   - Description: SEO Idaho™ is a distinguished company specializing in search engine optimization, known for its integrity-driven approach. They offer a comprehensive suite of services.
+
+2. Drake Cooper
+   - Location: Idaho
+   - Key Personnel:
+     - Kelsie Clegg, Creative Director
+     - Tyler Penner, Designer
+     - Gabe Silva Trevino, Senior Integrated Producer
+     - Lauren Nopar, Project Manager
+     - Nari Bowie, Human Resources Generalist
+     - Dee Marunde, Production Artist
+     - Kara Boonstra, Account Supervisor
+     - Jamie Levey, Senior Copywriter
+     - Mario Bibian, Senior Art Director
+     - Harry Orton, Creative Director
+     - Ginny Guzmán, Creative Re...
+[36m📘 [INFO][0m Step 4: Final formatting with OpenAI...
+[36m📘 [INFO][0m [h1srko] Progress: { step: 3, info: 'Preparing final results...' }
+[36m📘 [INFO][0m Final response received, length: 2363
+[36m📘 [INFO][0m Final response: "{\"companies\":[{\"name\":\"SEO Idaho™\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Boise, Idaho\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Digital Marketing and Development\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"SEO Idaho™ is noted for its integrity-driven approach in search engine optimization, offering a comprehensive suite of services including full-stack website development and social media marketing.\",\"tags\":[\"Search Engine Optimization\",\"Website Development\",\"Custom Programming\",\"Graphic Design\",\"Paid Advertisement Marketing\",\"Social Media Marketing\"]},{\"name\":\"Drake Cooper\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Idaho\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Advertising and Marketing\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"Drake Cooper is an advertising and marketing agency with a strong team of creative and strategic professionals.\",\"tags\":[\"Creative Director\",\"Designer\",\"Producer\",\"Project Manager\",\"Human Resources\",\"Account Supervisor\",\"Copywriter\",\"Art Director\",\"Strategy & Analytics\"]},{\"name\":\"Elliott's Color Box Media, LLC\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Pocatello, Idaho\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Advertising and Marketing\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"Elliott's Color Box Media focuses on advertising and marketing strategies to help companies increase sales.\",\"tags\":[\"Advertising\",\"Marketing\"]},{\"name\":\"Rinard Media\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Idaho\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Marketing\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"Rinard Media prides itself on delivering high-quality work with its skilled team.\",\"tags\":[\"Marketing\",\"Graphic Design\"]},{\"name\":\"Porter Pro Media\",\"revenue\":\"\",\"readiness\":\"\",\"location\":\"Idaho Falls, Idaho\",\"growth\":\"\",\"employees\":\"\",\"industry\":\"Marketing and Advertising\",\"logo\":\"\",\"sources\":{\"count\":0,\"details\":[]},\"reasoning\":\"Porter Pro Media specializes in content-first marketing strategies to boost customer acquisition and ROI.\",\"tags\":[\"Content Marketing\",\"Advertising\",\"Campaign Development\"]}]}"
+[32m✅ [SUCCESS][0m Successfully parsed final JSON, companies: {"companies":[{"name":"SEO Idaho™","revenue":"","readiness":"","location":"Boise, Idaho","growth":"","employees":"","industry":"Digital Marketing and Development","logo":"","sources":{"count":0,"details":[]},"reasoning":"SEO Idaho™ is noted for its integrity-driven approach in search engine optimization, offering a comprehensive suite of services including full-stack website development and social media marketing.","tags":["Search Engine Optimization","Website Development","Custom Programming","Graphic Design","Paid Advertisement Marketing","Social Media Marketing"]},{"name":"Drake Cooper","revenue":"","readiness":"","location":"Idaho","growth":"","employees":"","industry":"Advertising and Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Drake Cooper is an advertising and marketing agency with a strong team of creative and strategic professionals.","tags":["Creative Director","Designer","Producer","Project Manager","Human Resources","Account Supervisor","Copywriter","Art Director","Strategy & Analytics"]},{"name":"Elliott's Color Box Media, LLC","revenue":"","readiness":"","location":"Pocatello, Idaho","growth":"","employees":"","industry":"Advertising and Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Elliott's Color Box Media focuses on advertising and marketing strategies to help companies increase sales.","tags":["Advertising","Marketing"]},{"name":"Rinard Media","revenue":"","readiness":"","location":"Idaho","growth":"","employees":"","industry":"Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Rinard Media prides itself on delivering high-quality work with its skilled team.","tags":["Marketing","Graphic Design"]},{"name":"Porter Pro Media","revenue":"","readiness":"","location":"Idaho Falls, Idaho","growth":"","employees":"","industry":"Marketing and Advertising","logo":"","sources":{"count":0,"details":[]},"reasoning":"Porter Pro Media specializes in content-first marketing strategies to boost customer acquisition and ROI.","tags":["Content Marketing","Advertising","Campaign Development"]}]}
+Successfully parsed final JSON, companies: {"companies":[{"name":"SEO Idaho™","revenue":"","readiness":"","location":"Boise, Idaho","growth":"","employees":"","industry":"Digital Marketing and Development","logo":"","sources":{"count":0,"details":[]},"reasoning":"SEO Idaho™ is noted for its integrity-driven approach in search engine optimization, offering a comprehensive suite of services including full-stack website development and social media marketing.","tags":["Search Engine Optimization","Website Development","Custom Programming","Graphic Design","Paid Advertisement Marketing","Social Media Marketing"]},{"name":"Drake Cooper","revenue":"","readiness":"","location":"Idaho","growth":"","employees":"","industry":"Advertising and Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Drake Cooper is an advertising and marketing agency with a strong team of creative and strategic professionals.","tags":["Creative Director","Designer","Producer","Project Manager","Human Resources","Account Supervisor","Copywriter","Art Director","Strategy & Analytics"]},{"name":"Elliott's Color Box Media, LLC","revenue":"","readiness":"","location":"Pocatello, Idaho","growth":"","employees":"","industry":"Advertising and Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Elliott's Color Box Media focuses on advertising and marketing strategies to help companies increase sales.","tags":["Advertising","Marketing"]},{"name":"Rinard Media","revenue":"","readiness":"","location":"Idaho","growth":"","employees":"","industry":"Marketing","logo":"","sources":{"count":0,"details":[]},"reasoning":"Rinard Media prides itself on delivering high-quality work with its skilled team.","tags":["Marketing","Graphic Design"]},{"name":"Porter Pro Media","revenue":"","readiness":"","location":"Idaho Falls, Idaho","growth":"","employees":"","industry":"Marketing and Advertising","logo":"","sources":{"count":0,"details":[]},"reasoning":"Porter Pro Media specializes in content-first marketing strategies to boost customer acquisition and ROI.","tags":["Content Marketing","Advertising","Campaign Development"]}]}
+[32m✅ [SUCCESS][0m Companies: undefined
+[32m✅ [SUCCESS][0m [h1srko] Analysis completed successfully
