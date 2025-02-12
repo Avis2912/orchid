@@ -99,7 +99,8 @@ const CompanyList: React.FC<CompanyListProps> = ({ companies }) => {
                   gridTemplateColumns: "40px 1fr 1fr 1fr 1fr 1fr",
                   gap: "24px"
                 }}>
-                  <div className="flex-none text-2xl">{company.logo}</div>
+                  {/* <div className="flex-none text-2xl">{company.logo}</div> */}
+                  <img src={company.logo} className='w-10 h-10 rounded-lg' />
                   <div className="space-y-1">
                     <p className="text-sm font-[450] text-gray-900">{company.name}</p>
                     <p className="text-xs text-gray-500">{company.location}</p>

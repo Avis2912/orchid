@@ -51,7 +51,7 @@ const formatTime = (seconds: number) => {
 export default function HomePage() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isSearching, setIsSearching] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);
@@ -317,11 +317,15 @@ export default function HomePage() {
                     <div className="flex items-center gap-4 text-sm text-gray-500">
                       <span className="tabular-nums">Took {formatTime(totalElapsedTime)}</span>
                       <span>|</span>
-                      <p>Found {finalCompanies.length} matches</p>
+                      {/* <p>Found {finalCompanies.length} matches</p> */}
+                      <p>Found {dummyCompanies.length} matches</p>
+
                     </div>
                   </div>
 
-                  <CompanyList companies={finalCompanies.length ? finalCompanies : dummyCompanies} />
+                  {/* <CompanyList companies={finalCompanies.length ? finalCompanies : dummyCompanies} /> */}
+                  <CompanyList companies={dummyCompanies} />
+
 
                   {/* Updated CRM Button */}
                   <div className="mt-6 flex justify-end">

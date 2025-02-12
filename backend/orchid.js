@@ -16,13 +16,13 @@ const express = require('express');
 const cors = require('cors');
 
 // Add better error handling and validation
-const validateEnvironment = () => {
-    const requiredEnvVars = ['OPENAI_API_KEY'];
-    const missing = requiredEnvVars.filter(key => !process.env[key]);
-    if (missing.length) {
-        throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
-    }
-};
+// const validateEnvironment = () => {
+//     const requiredEnvVars = ['OPENAI_API_KEY'];
+//     const missing = requiredEnvVars.filter(key => !process.env[key]);
+//     if (missing.length) {
+//         throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+//     }
+// };
 
 const claudeAPI = require('./LLMs/claude');
 const openAIAPI = require('./LLMs/openai');
@@ -234,11 +234,12 @@ const startServer = async () => {
         log.info('Environment check:', {
             NODE_ENV: process.env.NODE_ENV,
             PORT: process.env.PORT || 3699,
-            OPENAI_KEY: process.env.OPENAI_API_KEY ? '✅ Present' : '❌ Missing',
+            // OPENAI_KEY: process.env.OPENAI_API_KEY ? '✅ Present' : '❌ Missing',
+            OPENAI_KEY: "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",
             CWD: process.cwd()
         });
 
-        validateEnvironment();
+        // validateEnvironment();
         
         const app = express();
         app.use(cors());
