@@ -51,7 +51,7 @@ const formatTime = (seconds: number) => {
 export default function HomePage() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isSearching, setIsSearching] = useState(false);
-  const [showResults, setShowResults] = useState(true);
+  const [showResults, setShowResults] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentStep, setCurrentStep] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<number[]>([]);

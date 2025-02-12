@@ -43,7 +43,7 @@ const openAIAPI = async (request) => {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+                'Authorization': `Bearer sk-svcacct-fjJ3_30rtc4wfyJuJKCTk3jG6wrIlDONK52h4RgDTf5dFOy3_kPE1oTgqdrxMgT3BlbkFJ0y9s4Cr_hK-eJaaTWSZ7Rr4_lkn_1Y520OqM1O-IkRMoFenv07IpAyXNuH4toA`,
             },
             body: JSON.stringify({
                 messages: formattedMessages,
