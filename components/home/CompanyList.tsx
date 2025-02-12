@@ -71,7 +71,7 @@ const TableHeader = () => (
       <div className="text-xs font-medium text-gray-500">COMPANY</div>
       <div className="text-xs font-medium text-gray-500">FINANCIALS</div>
       <div className="text-xs font-medium text-gray-500">TEAM</div>
-      <div className="text-xs font-medium text-gray-500">READINESS</div>
+      <div className="text-xs font-medium text-gray-500">GENERAL FIT</div>
       <div className="text-xs font-medium text-gray-500">SOURCES</div>
     </div>
   </div>
